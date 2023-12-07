@@ -49,7 +49,7 @@ conda env create -f Self-EHDRI.yaml
 [The datasets](https://drive.google.com/drive/folders/) can be downloaded via Google Drive.
 <br>
 The EBL2SH-ERGB Dataset contains three types of data:
-- **EBL2SH-S** contains HDR-LDR image pairs from Kalantari13, HDM-HDR-2014, and DeepHDRVideo. These datasets contain paired LDR-HDR video sequences which can be leveraged to synthesize events. Specifically, the blurry LDR image is obtained by averaging 13 consecutive LDR images, with corresponding HDR images serving as the sharp HDR sequence. We utilize the ESIM simulator \cite{rebecq2018esim} to synthesize concurrent events for each blurry LDR image.
-- **EBL2SH-RS** contains aligned real-world blurry LDR images, sharp HDR sequence, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in static scenes.
-- **EBL2SH-RD** contains aligned real-world blurry LDR images, sharp LDR images, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in dynamic scenes.
+- **BL2SHD-S** contains HDR-LDR image pairs from Kalantari13, HDM-HDR-2014, and DeepHDRVideo. These datasets contain paired LDR-HDR video sequences which can be leveraged to synthesize events. Specifically, the blurry LDR image is obtained by averaging 13 consecutive LDR images, with corresponding HDR images serving as the sharp HDR sequence. We utilize the ESIM simulator \cite{rebecq2018esim} to synthesize concurrent events for each blurry LDR image.
+- **BL2SHD-Rsimple** contains aligned real-world blurry LDR images, sharp HDR sequence, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in static scenes.
+- **BL2SHD-Rcomplex** contains aligned real-world blurry LDR images, sharp LDR images, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in dynamic scenes.
 
