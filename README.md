@@ -31,7 +31,7 @@ High Dynamic Range Imaging (HDRI) for dynamic scenes often suffers from intensit
 ## Environment setup
 - Python 3.8.13
 - Pytorch 2.0.0
-- NVIDIA GPU + CUDA 11.7
+- NVIDIA GPU 4090 + CUDA 11.7
   
 You can create a new [Anaconda](https://www.anaconda.com/products/individual) environment as follows.
 <br>
