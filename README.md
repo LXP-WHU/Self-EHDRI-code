@@ -62,6 +62,7 @@ The EBL2SH-ERGB Dataset contains three types of data:
 - Change the parent directory
 ```
 cd Self-EHDRI
+conda activate Self-EHDRI
 ```
 ### Test
 - Test on BL2SHD-S
