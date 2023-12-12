@@ -1,4 +1,4 @@
-name: EBL2SH
+name: Self-EHDRI
 channels:
   - pytorch
   - defaults
