@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=1 python test_syn.py --test_input /media/wh/22387B772691B5A3/lxp/PAMI/data_syn/synthetic/ --outputs_dir /media/wh/22387B772691B5A3/lxp/PAMI/results/EHDRI/ours/ --name EventVAE_syn --which_epoch latest --how_many 20
