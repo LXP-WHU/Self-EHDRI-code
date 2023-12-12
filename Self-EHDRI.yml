@@ -74,4 +74,4 @@ dependencies:
     - fastrlock==0.8.1
     - opencv-python==4.7.0.72
     - scipy==1.10.1
-prefix: /home/dsplxp/anaconda3/envs/EBL2SH
+prefix: /home/dsplxp/anaconda3/envs/Self-EHDRI
