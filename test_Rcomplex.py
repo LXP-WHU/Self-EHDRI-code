@@ -144,8 +144,8 @@ if __name__ == "__main__":
 
         temp_event = np.load(event_name)
         trigger = (trigger_all[2*i][1], trigger_all[2*i+1][1])
-        number_frame = 90
-        timestamps = np.linspace(0, 1, 90, dtype=np.float32)
+        number_frame = 11
+        timestamps = np.linspace(0, 1, 11, dtype=np.float32)
         for time_num in range(number_frame):
             time_dynamic = timestamps[time_num]
             # print(time_dynamic)
