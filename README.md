@@ -44,7 +44,11 @@ Install the above dependencies.
 cd Self-EHDRI
 conda env create -f Self-EHDRI.yaml
 ```
-
+Install the above dependencies.
+```
+cd Self-EHDRI
+conda env create -f Self-EHDRI.yaml
+```
 ## EBL2SH-ERGB Dataset Benchmark
 [The datasets](https://drive.google.com/drive/folders/) can be downloaded via Google Drive.
 <br>
@@ -53,3 +57,22 @@ The EBL2SH-ERGB Dataset contains three types of data:
 - **BL2SHD-Rsimple** contains aligned real-world blurry LDR images, sharp HDR sequence, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in static scenes.
 - **BL2SHD-Rcomplex** contains aligned real-world blurry LDR images, sharp LDR images, and real-world event streams images, which are captured by FLIR BFS-U3-32S4 camera, FLIR BFS-U3-04S2 camera, and SilkyEvCam event camera in dynamic scenes.
 
+## Quick start
+### Initialization
+- Change the parent directory
+```
+cd Self-EHDRI
+```
+### Test
+- Test on BL2SHD-S
+```
+bash test_syn.sh
+```
+- Test on BL2SHD-Rsimple
+```
+bash test_Rsimple.sh
+```
+- Test on BL2SHD-Rcomplex
+```
+bash test_Rcomplex.sh 
+```
