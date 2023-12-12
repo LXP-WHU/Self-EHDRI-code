@@ -128,44 +128,43 @@ if __name__ == "__main__":
     transform_img = transforms.Compose(transform_list)
     tonemapReinhard = cv2.createTonemapReinhard(1.5, 0,0,0)
     LDRBpth = os.path.join(dataroot, 'dynamic')
-    scenes_lists = gb.glob(os.path.join(LDRBpth, '91'))
+    scenes_lists = gb.glob(os.path.join(LDRBpth, '*'))
     # print(dataroot)
     for scene_name in scenes_lists:
         # print('scene_name',scene_name)
         scene_number = scene_name.split('dynamic/')[-1]
         trigger_name = os.path.join(scene_name, 'trigger.npy')
         trigger_all = np.load(trigger_name)
-        for i in tqdm(range(48,49,1)):
-            image_name = os.path.join(scene_name, 'LDR_gamma', str(i).zfill(5)+'.png')
-            event_name = os.path.join(scene_name, 'event_raw', str(i).zfill(5)+'.npy')
-            
-            LDRB_in = cv2.imread(image_name)
-            LDRB = LDRB_in[:, :, [2, 1, 0]]
-            LDRB = transform_img(LDRB).unsqueeze(0)
+        image_name = os.path.join(scene_name, 'LDR_gamma', str(i).zfill(5)+'.png')
+        event_name = os.path.join(scene_name, 'event_raw', str(i).zfill(5)+'.npy')
+        
+        LDRB_in = cv2.imread(image_name)
+        LDRB = LDRB_in[:, :, [2, 1, 0]]
+        LDRB = transform_img(LDRB).unsqueeze(0)
 
-            temp_event = np.load(event_name)
-            trigger = (trigger_all[2*i][1], trigger_all[2*i+1][1])
-            number_frame = 90
-            timestamps = np.linspace(0, 1, 90, dtype=np.float32)
-            for time_num in range(number_frame):
-                time_dynamic = timestamps[time_num]
-                # print(time_dynamic)
-                event_leftB, event_rightB, B_all_start, B_all_end = process_event(temp_event, time_dynamic, trigger)
-                event_leftB = torch.from_numpy(event_leftB).unsqueeze(0)
-                event_rightB = torch.from_numpy(event_rightB).unsqueeze(0)
-                B_all_start = torch.from_numpy(B_all_start).unsqueeze(0)
-                B_all_end = torch.from_numpy(B_all_end).unsqueeze(0)
-                fake_HDR_S, fake_LDR_S, fake_HDR_Recon = model.inference(LDRB, event_leftB, event_rightB, B_all_start)
+        temp_event = np.load(event_name)
+        trigger = (trigger_all[2*i][1], trigger_all[2*i+1][1])
+        number_frame = 90
+        timestamps = np.linspace(0, 1, 90, dtype=np.float32)
+        for time_num in range(number_frame):
+            time_dynamic = timestamps[time_num]
+            # print(time_dynamic)
+            event_leftB, event_rightB, B_all_start, B_all_end = process_event(temp_event, time_dynamic, trigger)
+            event_leftB = torch.from_numpy(event_leftB).unsqueeze(0)
+            event_rightB = torch.from_numpy(event_rightB).unsqueeze(0)
+            B_all_start = torch.from_numpy(B_all_start).unsqueeze(0)
+            B_all_end = torch.from_numpy(B_all_end).unsqueeze(0)
+            fake_HDR_S, fake_LDR_S, fake_HDR_Recon = model.inference(LDRB, event_leftB, event_rightB, B_all_start)
 
-                fake_HDR_S = fake_HDR_S.data.cpu().numpy()
-                fake_HDR_S = fake_HDR_S[0, ...].transpose(1, 2, 0)
-                fake_HDR_S = fake_HDR_S[:, :, ::-1]
-                fake_HDR_S = np.interp(fake_HDR_S, [fake_HDR_S.min(), fake_HDR_S.max()], [0, 1]).astype(fake_HDR_S.dtype)
-                # gene_nump = (gene_nump.clip(0, 1))
-                # gene_nump = tonemapReinhard.process(gene_nump)
-                # gene_nump = (gene_nump.clip(0, 1) * 255).astype(np.uint8)
-                ensure_dir(join(outputs_dir, 'dynamic', scene_number, str(i).zfill(5)))
-                cv2.imwrite(join(outputs_dir, 'dynamic', scene_number, str(i).zfill(5), str(time_num).zfill(2) + '.hdr'), fake_HDR_S)
+            fake_HDR_S = fake_HDR_S.data.cpu().numpy()
+            fake_HDR_S = fake_HDR_S[0, ...].transpose(1, 2, 0)
+            fake_HDR_S = fake_HDR_S[:, :, ::-1]
+            fake_HDR_S = np.interp(fake_HDR_S, [fake_HDR_S.min(), fake_HDR_S.max()], [0, 1]).astype(fake_HDR_S.dtype)
+            # gene_nump = (gene_nump.clip(0, 1))
+            # gene_nump = tonemapReinhard.process(gene_nump)
+            # gene_nump = (gene_nump.clip(0, 1) * 255).astype(np.uint8)
+            ensure_dir(join(outputs_dir, 'dynamic', scene_number, str(i).zfill(5)))
+            cv2.imwrite(join(outputs_dir, 'dynamic', scene_number, str(i).zfill(5), str(time_num).zfill(2) + '.hdr'), fake_HDR_S)
              
             #     fake_HDR_Recon = fake_HDR_Recon.data.cpu().numpy()
             #     fake_HDR_Recon = fake_HDR_Recon[0, ...].transpose(1, 2, 0)
