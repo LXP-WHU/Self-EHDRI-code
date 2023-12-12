@@ -116,7 +116,7 @@ def ensure_dir(path):
 def parameter_set(opt):
     ## Default parameters
     opt.serial_batches = True  # no shuffle
-    opt.checkpoints_dir = "./checkpoints/"
+    opt.checkpoints_dir = "./checkpoints_SYN/"
 
 if __name__ == "__main__":
 
